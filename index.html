@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hora do Ponto</title>
+    <title>Bater Ponto - Hora do Ponto</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,9 +22,13 @@
         </select>
     </div>
     
-    <button id="btnBaterPonto">Bater Ponto</button>
-    <div id="registroPonto"></div> <!-- Exibe o registro de batida de ponto -->
+    <div class="registro-ponto">
+        <button id="btnEntrada">Registrar Entrada</button>
+        <button id="btnSaida">Registrar Saída</button>
+    </div>
     
+    <div id="registroPonto"></div> <!-- Exibe o registro de batida de ponto -->
+
     <script src="js/index.js"></script>
 </body>
 </html>

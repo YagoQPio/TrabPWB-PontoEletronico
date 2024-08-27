@@ -65,8 +65,13 @@ select {
     max-width: 200px;
 }
 
-/* Botão */
-#btnBaterPonto {
+/* Botões de registro de ponto */
+.registro-ponto {
+    text-align: center;
+    margin: 20px auto;
+}
+
+#btnEntrada, #btnSaida {
     background: #007BFF;
     color: #fff;
     font-size: 1.2em;
@@ -75,15 +80,14 @@ select {
     padding: 10px 20px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    margin: 20px auto;
-    display: block;
+    margin: 10px;
 }
 
-#btnBaterPonto:hover {
+#btnEntrada:hover, #btnSaida:hover {
     background: #0056b3;
 }
 
-#btnBaterPonto:active {
+#btnEntrada:active, #btnSaida:active {
     transform: scale(0.98);
 }
 
@@ -102,14 +106,13 @@ select {
 
 /* Responsividade */
 @media (max-width: 600px) {
-    .DataHora, .selector, #registroPonto {
+    .DataHora, .selector, .registro-ponto, #registroPonto {
         max-width: 90%;
         padding: 10px;
     }
 
-    #btnBaterPonto {
+    #btnEntrada, #btnSaida {
         font-size: 1em;
         padding: 8px 16px;
     }
 }
-
