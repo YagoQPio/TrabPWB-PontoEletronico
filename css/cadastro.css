@@ -1,4 +1,3 @@
-/* Estilos para a página de login */
 body {
     display: flex;
     justify-content: center;
@@ -7,7 +6,7 @@ body {
     background: linear-gradient(135deg, #007BFF, #6c757d);
 }
 
-.login-container {
+.cadastro-container {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -35,6 +34,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -44,7 +44,7 @@ input[type="password"] {
     margin-bottom: 10px;
 }
 
-button#btnEntrar {
+button#btnCadastrar {
     background: #28a745;
     color: #fff;
     font-size: 1.2em;
@@ -56,11 +56,11 @@ button#btnEntrar {
     width: 100%;
 }
 
-button#btnEntrar:hover {
+button#btnCadastrar:hover {
     background: #218838;
 }
 
-button#btnEntrar:active {
+button#btnCadastrar:active {
     transform: scale(0.98);
 }
 
