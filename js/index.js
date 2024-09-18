@@ -28,30 +28,46 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('HMS').textContent = getCurrentHour(timeZone);
     }
 
-    // Função para registrar o ponto
-    function registrarPonto(tipo) {
-        const timeZone = document.getElementById('countrySelect').value;
-        const currentTime = getCurrentHour(timeZone);
-        const country = document.getElementById('countrySelect').options[document.getElementById('countrySelect').selectedIndex].text;
-        let registroTexto = `Ponto de ${tipo} registrado em ${country} às ${currentTime}`;
-        let registroDiv = document.getElementById('registroPonto');
-        registroDiv.innerHTML += `<p>${registroTexto}</p>`;
+    // Função para mostrar o pop-up de notificação
+    function showPopupNotification(message) {
+        const popup = document.getElementById('popupNotification');
+        popup.textContent = message;
+        popup.classList.remove('hide');
+        popup.classList.add('show');
+
+        setTimeout(() => {
+            popup.classList.remove('show');
+            popup.classList.add('hide');
+        }, 3000);
     }
 
-    // Event listeners para os botões de entrada e saída
-    document.getElementById('btnEntrada').addEventListener('click', function () {
-        registrarPonto('Entrada');
+    // Função para abrir o diálogo de registro de ponto
+    function openDialog() {
+        const timeZone = document.getElementById('countrySelect').value;
+        document.getElementById('dialogDate').textContent = getCurrentDate();
+        document.getElementById('dialogTime').textContent = getCurrentHour(timeZone);
+        document.getElementById('dialog').classList.remove('hide');
+    }
+
+    // Função para fechar o diálogo de registro de ponto
+    function closeDialog() {
+        document.getElementById('dialog').classList.add('hide');
+    }
+
+    // Adiciona o evento ao botão "Bater Ponto"
+    document.getElementById('btnBaterPonto').addEventListener('click', openDialog);
+
+    // Adiciona o evento ao botão "Salvar Ponto"
+    document.getElementById('btnSalvarPonto').addEventListener('click', function () {
+        const tipoPonto = document.getElementById('tipoPonto').value;
+        showPopupNotification(`Ponto registrado: ${tipoPonto}`);
+        closeDialog();
     });
 
-    document.getElementById('btnSaida').addEventListener('click', function () {
-        registrarPonto('Saída');
-    });
-
-    // Inicializa a exibição da data e da hora
+    // Atualiza o dia da semana e a data
     document.getElementById('DiaSemana').textContent = getWeekDay();
     document.getElementById('DMA').textContent = getCurrentDate();
-    atualizarHora();
 
-    // Atualiza a hora a cada 1000 milissegundos (1 segundo)
+    // Atualiza a hora a cada segundo
     setInterval(atualizarHora, 1000);
 });

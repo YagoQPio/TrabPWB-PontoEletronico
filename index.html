@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <div class="DataHora">
         <p id="DiaSemana">Segunda-feira</p>
         <p id="DMA">26/08/2024</p> <!-- Dia Mês Ano -->
@@ -14,20 +15,37 @@
     </div>
     
     <div class="selector">
-        <label for="countrySelect">Selecione o país:</label>
+        <label for="countrySelect">Selecione o fuso horário do Brasil:</label>
         <select id="countrySelect">
-            <option value="America/Sao_Paulo">Brasil</option>
-            <option value="America/New_York">EUA</option>
-            <option value="Asia/Shanghai">China</option>
+            <option value="America/Sao_Paulo">Horário de Brasília (BRT - UTC-03:00)</option>
+            <option value="America/Manaus">Horário do Amazonas (AMT - UTC-04:00)</option>
+            <option value="America/Rio_Branco">Horário do Acre (ACT - UTC-05:00)</option>
+            <option value="America/Noronha">Fernando de Noronha (FNT - UTC-02:00)</option>
         </select>
     </div>
     
     <div class="registro-ponto">
-        <button id="btnEntrada">Registrar Entrada</button>
-        <button id="btnSaida">Registrar Saída</button>
+        <button id="btnBaterPonto">Bater Ponto</button>
     </div>
-    
-    <div id="registroPonto"></div> <!-- Exibe o registro de batida de ponto -->
+
+    <!-- Diálogo de registro de ponto -->
+    <div id="dialog" class="dialog hide">
+        <div class="dialog-content">
+            <p id="dialogDate"></p>
+            <p id="dialogTime"></p>
+            <label for="tipoPonto">Selecione o tipo de ponto:</label>
+            <select id="tipoPonto">
+                <option value="Entrada">Entrada</option>
+                <option value="InicioIntervalo">Início do Intervalo</option>
+                <option value="FimIntervalo">Fim do Intervalo</option>
+                <option value="Saida">Saída</option>
+            </select>
+            <button id="btnSalvarPonto">Salvar Ponto</button>
+        </div>
+    </div>
+
+    <!-- Pop-up de notificação -->
+    <div id="popupNotification" class="hide"></div>
 
     <script src="js/index.js"></script>
 </body>
