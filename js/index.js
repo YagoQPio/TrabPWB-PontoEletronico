@@ -15,61 +15,54 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${day}/${month}/${year}`;
     }
 
-    // Função para obter a hora atual
-    function getCurrentHour() {
+    // Função para obter a hora atual no fuso horário selecionado
+    function getCurrentHour(timeZone) {
         const date = new Date();
-        return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+        const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        return new Intl.DateTimeFormat('pt-BR', options).format(date);
     }
 
     // Atualiza a exibição da hora
     function atualizarHora() {
-        document.getElementById('HMS').textContent = getCurrentHour();
-    }
-
-    // Função para mostrar o modal
-    function openModal() {
-        const modal = document.getElementById('modalPonto');
-        modal.style.display = 'flex';
-        document.getElementById('modalData').textContent = `Data: ${getCurrentDate()}`;
-        document.getElementById('modalHora').textContent = `Hora: ${getCurrentHour()}`;
-    }
-
-    // Função para fechar o modal
-    function closeModal() {
-        document.getElementById('modalPonto').style.display = 'none';
+        const timeZone = document.getElementById('countrySelect').value;
+        document.getElementById('HMS').textContent = getCurrentHour(timeZone);
     }
 
     // Função para mostrar o pop-up de notificação
     function showPopupNotification(message) {
         const popup = document.getElementById('popupNotification');
         popup.textContent = message;
+        popup.classList.remove('hide');
         popup.classList.add('show');
-        setTimeout(function () {
+
+        setTimeout(() => {
             popup.classList.remove('show');
+            popup.classList.add('hide');
         }, 3000);
     }
 
-    // Função para salvar o ponto
-    function savePonto() {
+    // Função para abrir o diálogo de registro de ponto
+    function openDialog() {
+        const timeZone = document.getElementById('countrySelect').value;
+        document.getElementById('dialogDate').textContent = getCurrentDate();
+        document.getElementById('dialogTime').textContent = getCurrentHour(timeZone);
+        document.getElementById('dialog').classList.remove('hide');
+    }
+
+    // Função para fechar o diálogo de registro de ponto
+    function closeDialog() {
+        document.getElementById('dialog').classList.add('hide');
+    }
+
+    // Adiciona o evento ao botão "Bater Ponto"
+    document.getElementById('btnBaterPonto').addEventListener('click', openDialog);
+
+    // Adiciona o evento ao botão "Salvar Ponto"
+    document.getElementById('btnSalvarPonto').addEventListener('click', function () {
         const tipoPonto = document.getElementById('tipoPonto').value;
         showPopupNotification(`Ponto registrado: ${tipoPonto}`);
-        closeModal();
-        registrarPonto(tipoPonto); // Registra o ponto na lista
-    }
-
-    // Função para registrar o ponto
-    function registrarPonto(tipo) {
-        const currentTime = getCurrentHour();
-        const currentDate = getCurrentDate();
-        let registroTexto = `Ponto de ${tipo} registrado em ${currentDate} às ${currentTime}`;
-        let registroDiv = document.getElementById('registroPonto');
-        registroDiv.innerHTML += `<p>${registroTexto}</p>`;
-    }
-
-    // Eventos para abrir e fechar o modal e salvar o ponto
-    document.getElementById('btnBaterPonto').addEventListener('click', openModal);
-    document.getElementsByClassName('close')[0].addEventListener('click', closeModal);
-    document.getElementById('btnSalvarPonto').addEventListener('click', savePonto);
+        closeDialog();
+    });
 
     // Atualiza o dia da semana e a data
     document.getElementById('DiaSemana').textContent = getWeekDay();
